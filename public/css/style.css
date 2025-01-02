@@ -8,6 +8,10 @@
   margin-top: 20px;
 }
 
+.mr-1 {
+  margin-right: 10px;
+}
+
 body {
   padding-bottom: 60px; /* 調整為頁腳的高度 */
 }
