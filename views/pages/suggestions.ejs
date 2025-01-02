@@ -18,10 +18,18 @@
           <div>
             <strong><%= item.feature %></strong>: <%= item.reason %>
           </div>
-          <form action="/suggestions/delete" method="POST" class="d-inline">
-            <input type="hidden" name="index" value="<%= index %>">
-            <button type="submit" class="btn btn-danger btn-sm">刪除</button>
-          </form>
+        
+          <div class="d-flex">
+            <!-- 編輯按鈕 -->
+            <a href="/suggestions/edit/<%= index %>" class="btn btn-warning btn-sm mr-2">編輯</a>
+            
+            <!-- 刪除按鈕 -->
+            <form action="/suggestions/delete" method="POST" class="d-inline">
+              <input type="hidden" name="index" value="<%= index %>">
+              <button type="submit" class="btn btn-danger btn-sm">刪除</button>
+            </form>
+          </div>
         </li>
+        
       <% }) %>
     </ul>

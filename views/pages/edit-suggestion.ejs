@@ -1,0 +1,12 @@
+<h2>編輯建議</h2>
+<form action="/suggestions/update/<%= index %>" method="POST">
+  <div class="mb-3">
+    <label for="feature" class="form-label">功能建議</label>
+    <input type="text" class="form-control" id="feature" name="feature" value="<%= suggestion.feature %>" required>
+  </div>
+  <div class="mb-3">
+    <label for="reason" class="form-label">建議理由</label>
+    <textarea class="form-control" id="reason" name="reason" required><%= suggestion.reason %></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">提交修改</button>
+</form>

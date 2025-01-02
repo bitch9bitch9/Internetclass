@@ -42,6 +42,17 @@ router.get("/:page?", (req, res) => {
   res.render("index", { page, data, suggestions });
 });
 
+// 編輯建議頁面
+router.get("/edit/:index", (req, res) => {
+  const index = req.params.index;
+  if (index >= 0 && index < suggestions.length) {
+    const suggestion = suggestions[index];
+    res.render("index", { data: {title: "編輯建議"}, page: 'edit-suggestion', suggestion, index });
+  } else {
+    res.redirect("/suggestions");
+  }
+});
+
 router.post("/add", (req, res) => {
   const { feature, reason } = req.body;
   if (feature && reason) {
@@ -56,6 +67,17 @@ router.post("/delete", (req, res) => {
   if (index !== undefined && index < suggestions.length) {
     suggestions.splice(index, 1);
     saveSuggestions(); // 保存數據
+  }
+  res.redirect("/suggestions");
+});
+
+// 處理更新建議
+router.post("/update/:index", (req, res) => {
+  const { feature, reason } = req.body;
+  const index = req.params.index;
+  if (index >= 0 && index < suggestions.length) {
+    suggestions[index] = { feature, reason };
+    saveSuggestions();
   }
   res.redirect("/suggestions");
 });
