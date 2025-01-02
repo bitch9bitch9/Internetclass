@@ -7,6 +7,32 @@ const router = express.Router();
 const dataFilePath = path.join(__dirname, "../data/suggestions.json");
 
 let suggestions = []; // 伺服器端的資料存儲
+
+// 初始化檔案
+const initializeSuggestionsFile = () => {
+  try {
+    // 確保資料夾存在
+    const dirPath = path.dirname(dataFilePath);
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true }); // 自動建立資料夾
+    }
+
+    // 確保檔案存在且格式正確
+    if (!fs.existsSync(dataFilePath)) {
+      console.warn("Suggestions file not found. Creating a new one...");
+      saveSuggestions(); // 建立空檔案
+    } else {
+      const data = fs.readFileSync(dataFilePath, "utf-8");
+      JSON.parse(data); // 驗證格式
+    }
+  } catch (error) {
+    console.error("Error initializing suggestions file:", error);
+    fs.writeFileSync(dataFilePath, JSON.stringify([])); // 重建空檔案
+  }
+};
+
+
+// 載入數據
 const loadSuggestions = () => {
   try {
     const data = fs.readFileSync(dataFilePath, "utf-8");
@@ -27,6 +53,7 @@ const saveSuggestions = () => {
 };
 
 // 初始化載入數據
+initializeSuggestionsFile();
 loadSuggestions();
 
 // 模擬頁面資料
