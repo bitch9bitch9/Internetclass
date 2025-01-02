@@ -11,7 +11,8 @@ const pages = {
 };
 
 // 定義路由
-router.get("/:page?", (req, res) => {
+router.get("/:page?", (req, res, next) => {
+  if (req.params.page === "suggestions") return next();
   const page = req.params.page || "home";
   const data = pages[page] || pages.home;
 
