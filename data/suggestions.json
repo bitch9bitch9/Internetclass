@@ -1,10 +1,6 @@
 [
   {
-    "feature": "test-edit",
-    "reason": "test-edit"
-  },
-  {
-    "feature": "test1",
-    "reason": "test1"
+    "feature": "test",
+    "reason": "test"
   }
 ]
